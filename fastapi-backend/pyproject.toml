@@ -1,0 +1,24 @@
+[project]
+name = "fastapi-backend"
+version = "0.1.0"
+description = "Expense tracker learning backend"
+readme = "README.md"
+authors = [
+    { name = "Niraj Singh", email = "nirajcx@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.34,<1",
+    "sqlalchemy[asyncio]>=2.0,<2.1",
+    "psycopg[binary]>=3.2,<4",
+    "pydantic-settings>=2.7,<3",
+    "alembic>=1.14,<2",
+]
+
+[project.scripts]
+db-check = "fastapi_backend.db.check:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"

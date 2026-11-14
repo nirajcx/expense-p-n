@@ -1,0 +1,46 @@
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Secrets (commit only sanitized examples)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Node / Next.js generated output
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+
+# Python environments, caches and builds
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+coverage/
+*.log
+logs/
+
+# Local database backups / data
+*.dump
+*.backup
+/postgres-data/
+
+# Keep source migrations, .env.example, package-lock.json and uv.lock tracked.
