@@ -14,7 +14,7 @@ npm run db:seed
 npm run dev
 ```
 
-The seed adds one demo owner and one expense, is development-only and safe to rerun. It never clears existing tables. `npm start` runs without nodemon; `npm run dev` watches `src/` and `.env` and supports `rs` for manual restart.
+The seed adds one demo owner and one expense, is development-only and safe to rerun. It never clears existing tables. `npm start` runs without nodemon; `npm run dev` watches application folders, root entry points and `.env` and supports `rs` for manual restart.
 
 ## Implemented endpoints
 
@@ -39,36 +39,36 @@ Page defaults to 1 (maximum 10000), limit defaults to 20 (maximum 100). Unknown 
 ## Layout and naming
 
 ```text
-src/
-  app.js                         # Route composition; no listener
-  server.js                      # Startup / shutdown lifecycle
-  config/env.js                  # Validated configuration
-  db/
-    pool.js                      # PostgreSQL pool + connectivity check
-    client.js                    # Drizzle client using that pool
-    schema.js                    # Central exports of feature models
-    columns.js                   # Shared timestamp column factory
-  modules/
-    health/health.routes.js
-    expenses/
-      expense.model.js           # Drizzle expenses table
-      expense.routes.js          # URL + middleware wiring
-      expense.controller.js      # HTTP input/output
-      expense.schema.js          # Zod query validation (not a DB model)
-      expense.service.js         # Pagination / application behavior
-      expense.repository.js      # Scoped Drizzle query
-    users/user.model.js          # Drizzle users table
-    auth/, categories/, admin/   # Future feature placeholders
-  middleware/                    # Demo identity, 404 and error handlers
-  utils/                         # ApiError and response helper
-scripts/                         # DB check, migrations, demo seed
-migrations/                      # SQL plus Drizzle metadata; commit both
-tests/                          # Validation + opt-in DB/API tests
+node-backend/
+├── config/env.js                 # Validated environment
+├── controllers/expense.controller.js  # HTTP request / response
+├── models/                       # Drizzle database models
+│   ├── user.model.js
+│   └── expense.model.js
+├── routes/                       # Health and expense endpoints
+├── middlewares/                  # Demo identity, 404 and error handlers
+├── services/expense.service.js   # Application logic
+├── schemas/expense.schema.js     # Zod request validation
+├── repositories/expense.repository.js # Database queries
+├── utils/                        # Error and response helpers
+├── database/
+│   ├── pool.js                   # PostgreSQL connection pool
+│   ├── client.js                 # Drizzle client
+│   ├── columns.js                # Shared timestamp columns
+│   └── schema.js                 # Central model exports
+├── tests/                        # Validation and integration tests
+├── migrations/                   # SQL and Drizzle metadata
+├── scripts/                      # DB check, migrate and seed commands
+├── app.js                        # Express route / middleware composition
+├── server.js                     # Startup and shutdown
+├── drizzle.config.js
+├── nodemon.json
+└── package.json
 ```
 
-Files use lowercase kebab-case for utilities and `entity.layer.js` for feature layers. Functions/variables and JSON properties use camelCase, classes use PascalCase, environment variables use UPPER_SNAKE_CASE. Database tables are plural snake_case; columns/constraints/indexes use snake_case. `*.model.js` files define Drizzle database models; `*.schema.js` files inside feature folders define Zod request validation. The special `db/schema.js` file only re-exports database models for Drizzle. Avoid duplicate model definitions. Local ESM imports include `.js`; use `import/export`, not CommonJS.
+Files use lowercase kebab-case for utilities and `entity.layer.js` for feature layers. Functions/variables and JSON properties use camelCase, classes use PascalCase, environment variables use UPPER_SNAKE_CASE. Database tables are plural snake_case; columns/constraints/indexes use snake_case. `*.model.js` files define Drizzle database models; `*.schema.js` files inside `schemas/` define Zod request validation. The special `database/schema.js` file only re-exports database models for Drizzle. Avoid duplicate model definitions. Local ESM imports include `.js`; use `import/export`, not CommonJS.
 
-Models import foreign-key targets directly from the related `*.model.js`, never through the central export file. Register any new model in `db/schema.js` so migration generation and the runtime client discover it. Add `user.schema.js` when implementing user/auth input validation; no unused validation placeholder is needed yet.
+Models import foreign-key targets directly from the related `*.model.js`, never through the central export file. Register any new model in `database/schema.js` so migration generation and the runtime client discover it. Add `schemas/user.schema.js` when implementing user/auth input validation; no unused validation placeholder is needed yet.
 
 ## Models and migration workflow
 
@@ -79,7 +79,7 @@ Models import foreign-key targets directly from the related `*.model.js`, never 
 Database triggers update `updated_at` for both SQL and ORM updates; `created_at` stays unchanged. Trigger SQL is a custom migration and will not be generated from Drizzle's table model.
 
 ```sh
-# Edit the relevant modules/<feature>/*.model.js, then generate and inspect the SQL:
+# Edit the relevant models/*.model.js, then generate and inspect the SQL:
 npm run db:generate -- --name=describe-change
 npm run db:migrate
 # For custom SQL such as triggers:

@@ -11,9 +11,9 @@ test('expense API ownership, pagination, errors and DB constraints', {
   const otherId = randomUUID();
   process.env.NODE_ENV = 'development';
   process.env.DEMO_USER_ID = ownerId;
-  const { app } = await import('../src/app.js');
-  const { pool } = await import('../src/db/pool.js');
-  const { env } = await import('../src/config/env.js');
+  const { app } = await import('../app.js');
+  const { pool } = await import('../database/pool.js');
+  const { env } = await import('../config/env.js');
   let server;
   try {
     await pool.query('INSERT INTO users (id, email, display_name) VALUES ($1, $2, $3), ($4, $5, $3)',

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start": "node --env-file-if-exists=.env src/server.js",
+    "start": "node --env-file-if-exists=.env server.js",
     "db:check": "node --env-file-if-exists=.env scripts/check-db.js",
     "db:migrate": "node --env-file-if-exists=.env scripts/migrate.js",
     "db:generate": "node --env-file-if-exists=.env node_modules/drizzle-kit/bin.cjs generate",

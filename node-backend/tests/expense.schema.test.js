@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { listExpensesSchema } from '../src/modules/expenses/expense.schema.js';
+import { listExpensesSchema } from '../schemas/expense.schema.js';
 
 test('pagination has bounded defaults and accepts integer query strings', () => {
   assert.deepEqual(listExpensesSchema.parse({}), { page: 1, limit: 20 });

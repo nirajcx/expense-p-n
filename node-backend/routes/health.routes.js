@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkDatabase } from '../../db/pool.js';
+import { checkDatabase } from '../database/pool.js';
 
 export const healthRouter = Router();
 healthRouter.get('/live', (_req, res) => res.json({ status: 'ok' }));

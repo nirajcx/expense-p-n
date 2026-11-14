@@ -1,6 +1,6 @@
 import { app } from "./app.js";
 import { env } from "./config/env.js";
-import { pool, checkDatabase } from "./db/pool.js";
+import { pool, checkDatabase } from "./database/pool.js";
 
 try {
   console.log("Checking PostgreSQL connection...");

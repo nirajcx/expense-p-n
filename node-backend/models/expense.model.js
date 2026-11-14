@@ -1,7 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { pgTable, uuid, varchar, numeric, date, check, index } from 'drizzle-orm/pg-core';
-import { timestamps } from '../../db/columns.js';
-import { users } from '../users/user.model.js';
+import { timestamps } from '../database/columns.js';
+import { users } from './user.model.js';
 
 export const expenses = pgTable('expenses', {
   id: uuid('id').defaultRandom().primaryKey(),

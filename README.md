@@ -107,9 +107,9 @@ The apps currently run on your host, so DB host is `127.0.0.1`. If you container
 
 ## Folder responsibilities
 
-- Node `src/config`: validated environment; `src/db`: connection pool; `src/modules`: feature code; `src/middleware`: future shared HTTP policies.
+- Node uses layer-based folders directly under `node-backend/`: `config`, `controllers`, `models`, `routes`, `middlewares`, `services`, `utils`, `database` and `tests`. `schemas` holds Zod validation; `repositories` holds DB queries. `app.js` composes the app and `server.js` starts it.
 - Python `core`: settings; `db`: engine/session/Base; `modules`: feature code.
-- Both `modules/` contain `auth`, `users`, `expenses`, `categories`, `admin` placeholders.
+- FastAPI retains feature-based `modules/` placeholders for `auth`, `users`, `expenses`, `categories` and `admin`. Node features are grouped by layer; add future auth files to the corresponding folders.
 - Both `migrations/` track explicit schema changes. No automatic table creation at application startup.
 
 As you implement a feature, add only needed files: route/controller handles HTTP, service enforces business rules, repository handles queries, schema validates input/output. Python equivalents are router/service/repository/schemas/models. Don't create empty abstraction layers just to fill a diagram.

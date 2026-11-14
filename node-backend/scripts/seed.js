@@ -1,7 +1,7 @@
-import { db } from '../src/db/client.js';
-import { pool } from '../src/db/pool.js';
-import { users, expenses } from '../src/db/schema.js';
-import { env } from '../src/config/env.js';
+import { db } from '../database/client.js';
+import { pool } from '../database/pool.js';
+import { users, expenses } from '../database/schema.js';
+import { env } from '../config/env.js';
 
 try {
   if (env.NODE_ENV !== 'development' || !env.DEMO_USER_ID) {

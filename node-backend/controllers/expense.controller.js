@@ -1,7 +1,7 @@
-import { listExpensesSchema } from './expense.schema.js';
-import { listExpenses } from './expense.service.js';
-import { ApiError } from '../../utils/api-error.js';
-import { sendData } from '../../utils/api-response.js';
+import { listExpensesSchema } from '../schemas/expense.schema.js';
+import { listExpenses } from '../services/expense.service.js';
+import { ApiError } from '../utils/api-error.js';
+import { sendData } from '../utils/api-response.js';
 
 export async function getExpenses(req, res) {
   const parsed = listExpensesSchema.safeParse(req.query);

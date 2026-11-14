@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm';
 import { pgTable, uuid, varchar, check } from 'drizzle-orm/pg-core';
-import { timestamps } from '../../db/columns.js';
+import { timestamps } from '../database/columns.js';
 
 // Minimal owner model. Passwords, roles and sessions belong to the auth milestone.
 export const users = pgTable('users', {

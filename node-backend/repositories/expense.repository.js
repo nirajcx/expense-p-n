@@ -1,6 +1,6 @@
 import { desc, eq } from 'drizzle-orm';
-import { db } from '../../db/client.js';
-import { expenses } from './expense.model.js';
+import { db } from '../database/client.js';
+import { expenses } from '../models/expense.model.js';
 
 export async function findExpensesByUserId(userId, { page, limit }) {
   return db.select({

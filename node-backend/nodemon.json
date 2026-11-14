@@ -1,8 +1,25 @@
 {
-  "watch": ["src", ".env"],
+  "watch": [
+    "app.js",
+    "server.js",
+    "config",
+    "controllers",
+    "models",
+    "routes",
+    "middlewares",
+    "services",
+    "schemas",
+    "repositories",
+    "utils",
+    "database",
+    ".env"
+  ],
   "ext": "js,json,env",
-  "ignore": ["migrations/**", "node_modules/**"],
-  "exec": "node --env-file=.env src/server.js",
+  "ignore": [
+    "migrations/**",
+    "node_modules/**"
+  ],
+  "exec": "node --env-file=.env server.js",
   "signal": "SIGTERM",
   "delay": "300"
 }

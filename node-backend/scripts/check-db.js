@@ -1,4 +1,4 @@
-import { pool, checkDatabase } from '../src/db/pool.js';
+import { pool, checkDatabase } from '../database/pool.js';
 
 try {
   await checkDatabase();

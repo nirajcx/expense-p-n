@@ -1,7 +1,7 @@
 import express from 'express';
-import { healthRouter } from './modules/health/health.routes.js';
-import { expenseRouter } from './modules/expenses/expense.routes.js';
-import { errorHandler, notFound } from './middleware/error-handler.js';
+import { healthRouter } from './routes/health.routes.js';
+import { expenseRouter } from './routes/expense.routes.js';
+import { errorHandler, notFound } from './middlewares/error-handler.js';
 
 export const app = express();
 app.disable('x-powered-by');

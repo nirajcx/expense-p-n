@@ -1,4 +1,4 @@
-import { findExpensesByUserId } from './expense.repository.js';
+import { findExpensesByUserId } from '../repositories/expense.repository.js';
 
 export async function listExpenses(userId, pagination) {
   const rows = await findExpensesByUserId(userId, pagination);
